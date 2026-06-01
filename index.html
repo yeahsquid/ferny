@@ -347,7 +347,16 @@
     window.scrollTo(0, 0);
     setTimeout(triggerReveal, 100);
   }
-
+ 
+ fetch("https://www.youtube.com/oembed?url=https://www.youtube.com/@xoferny&format=json")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("yt-avatar").src = data.thumbnail_url;
+  })
+  .catch(() => {
+    console.log("Could not load YouTube avatar");
+  });
+ 
   function triggerReveal() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -360,15 +369,6 @@
   }
 
   triggerReveal();
- 
-fetch("https://www.youtube.com/oembed?url=https://www.youtube.com/@xoferny&format=json")
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("yt-avatar").src = data.thumbnail_url;
-  })
-  .catch(() => {
-    console.log("Could not load YouTube avatar");
-  });
 </script>
 </body>
 </html>
